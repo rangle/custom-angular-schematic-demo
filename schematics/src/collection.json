@@ -1,0 +1,20 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "add-lib": {
+      "factory": "./add-lib/index#addLib",
+      "description": "Update an application with a library",
+      "schema": "./add-lib/schema.json"
+    },
+    "component": {
+      "factory": "./component/index#component",
+      "description": "Add a standalone component",
+      "schema": "./component/schema.json"
+    },
+    "ng-add": {
+      "description": "Add library and configure",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    }
+  }
+}

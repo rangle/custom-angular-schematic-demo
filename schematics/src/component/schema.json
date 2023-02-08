@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Component Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the component."
+    },
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  }
+}
