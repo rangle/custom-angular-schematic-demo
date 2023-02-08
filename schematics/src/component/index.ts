@@ -12,7 +12,7 @@ export function component(_options: any): Rule {
         ...strings,
         ..._options
       }),
-        move('src'),
+        move('src/app'),
       ],
     );
     return chain([
