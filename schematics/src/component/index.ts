@@ -1,4 +1,4 @@
-import { strings } from '@angular-devkit/core';
+import { strings, normalize } from '@angular-devkit/core';
 import { apply, chain, externalSchematic, MergeStrategy, mergeWith, move, Rule, SchematicContext, SchematicsException, template, Tree, url } from '@angular-devkit/schematics';
 
 export function component(options: any): Rule {
@@ -19,7 +19,7 @@ export function component(options: any): Rule {
         ...strings,
         ...options
       }),
-        move(options.path || defaultRoot),
+        move(normalize(options.path || defaultRoot)),
       ],
     );
     return chain([
