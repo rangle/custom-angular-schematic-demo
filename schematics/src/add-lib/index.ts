@@ -16,7 +16,8 @@ const printSourceRootRule = (projectName: string) => {
 
 const addJestToDependencyRule = () => {
   return (tree: Tree, context: SchematicContext) => {
-    context.addTask(new NodePackageInstallTask('jest'));
+    context.logger.info(`Installing jest as dependency`);
+    context.addTask(new NodePackageInstallTask({packageName: 'jest'}));
     return tree;
   };
 }
@@ -38,7 +39,7 @@ export function addLib(_options: any): Rule {
   const { project } = _options;
   return chain([
     printSourceRootRule(project),
-    addTestScriptsRule(),
     addJestToDependencyRule(),
+    addTestScriptsRule(),
   ]);
 }
