@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "tsconfig",
     "lib": ["es2018", "dom"],
-    "outDir": "dist",
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
