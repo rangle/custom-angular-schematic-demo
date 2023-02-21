@@ -1,27 +1,30 @@
 import { strings, normalize } from '@angular-devkit/core';
-import { apply, chain, externalSchematic, MergeStrategy, mergeWith, move, Rule, SchematicContext, SchematicsException, template, Tree, url } from '@angular-devkit/schematics';
+import { apply, chain, externalSchematic, MergeStrategy, mergeWith, move, Rule, SchematicContext, template, Tree, url } from '@angular-devkit/schematics';
+import { getDefaultSourceRoot, getProject } from '../util/project';
 
+/** When users run the `ng g ds-schematics:component` command, the Angular CLI will execute this `component` function.
+ * Generates a standalone component or a component that is part of an ngNodule.
+ * Option `project` determines the default path for the component. 
+ * For example, if the `project` is set to `my-lib`, the default path will be `projects/my-lib/src/lib`.
+*/
 export function component(options: any): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.info(JSON.stringify(options) + ' params to generate the component');
-    const workspaceConfigBuffer = tree.read('angular.json');
-    if ( !workspaceConfigBuffer ) {
-      throw new SchematicsException('Not an Angular CLI workspace');
-    }
-    const project = JSON.parse(workspaceConfigBuffer.toString())?.projects[options.project];
-    const sourceRoot = project?.sourceRoot;
-    const prefix = project?.prefix;
-    const defaultRoot = `${sourceRoot}/${prefix}`
+    const project = getProject(tree, options.project);
+    const componentTemplates = options.standalone ? 'standalone-component' : 'component';
 
     const templateSource = apply(
-      url('./files'), [
+      url(`./files/${componentTemplates}`), [
         template({
         ...strings,
         ...options
       }),
-        move(normalize(options.path || defaultRoot)),
+        move(normalize(options.path || getDefaultSourceRoot(project))),
       ],
     );
+    // Chain multiple rules together and execute them one after the other.
+    // First the `externalSchematic` method generates a component using the Angular CLI schematic.
+    // Then the `mergeWith` method merges the component files generated from the templateSource with the files generated from the Angular CLI schematic.
     return chain([
       externalSchematic('@schematics/angular', 'component', {
         ...options,
