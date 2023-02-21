@@ -7,10 +7,13 @@
     "dev": "tsc -p tsconfig.json -w",
     "test": "npm run build && jasmine src/**/*.test.js"
   },
+  "ng-add": {
+    "save": "devDependencies"
+  },
   "keywords": [
     "schematics"
   ],
-  "author": "",
+  "author": "stephanie.zeng@rangle.io",
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {
