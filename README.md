@@ -15,7 +15,16 @@ This is a demo repository for the blog post "How to Use Custom Schematics to Sup
 
 ## Test the `Component` Command
 
-- Run `ng g ds-schematics:component --name=checkbox` to generate a standalone checkbox component
+- Run `ng g ds-schematics:component --name=checkbox --standalone` to generate a standalone checkbox component
+
+```bash
+CREATE src/app/checkbox/checkbox.component.scss (0 bytes)
+CREATE src/app/checkbox/checkbox.component.html (0 bytes)
+CREATE src/app/checkbox/checkbox.component.spec.ts (613 bytes)
+CREATE src/app/checkbox/checkbox.component.ts (263 bytes)
+```
+
+- Run `ng g ds-schematics:component --name=checkbox` to generate a component that is part of the AppModule
 
 ```bash
 CREATE src/app/checkbox/checkbox.component.scss (0 bytes)
@@ -28,7 +37,7 @@ UPDATE src/app/app.module.ts (484 bytes)
 ## Test the `ng add` Command
 
 - Run `ng g ds-schematics:ng-add`
-- This command updates the npm script `test: jest` and install Jest as dependency
+- This command updates the npm script `test: jest` and install Jest as a dependency
 
 ## FAQ
 

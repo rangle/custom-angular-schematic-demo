@@ -13,6 +13,10 @@ export function component(options: any): Rule {
     const project = getProject(tree, options.project);
     const componentTemplates = options.standalone ? 'standalone-component' : 'component';
 
+    if (options.path === undefined) {
+      options.path = getDefaultSourceRoot(project);
+    }
+
     // Create a template source from the ejs template files in the `files` directory.
     // Pass in the options (such as name) to the template function to replace the placeholders with the values from the options.
     // Pass in the strings utility to the template function to convert strings to formats such as dasherize, classify, etc.
@@ -22,8 +26,8 @@ export function component(options: any): Rule {
         ...strings,
         ...options
       }),
-        // Move the generated files to the default source root of the project if the path option is not specified.
-        move(normalize(options.path || getDefaultSourceRoot(project))),
+        // Move the generated files to the designated path when the schematic is applied.
+        move(normalize(options.path)),
       ],
     );
     // Chain multiple rules together and execute them one after the other.
