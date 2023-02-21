@@ -1,7 +1,7 @@
 import { Tree, SchematicsException } from "@angular-devkit/schematics";
 
 /** Returns the project object from the angular.json file based on project name
- * @param tree - The file system tree
+ * @param tree - The virtual file system tree
  * @param projectName - The name of the project
  * @returns The project object from angular.json
  */
